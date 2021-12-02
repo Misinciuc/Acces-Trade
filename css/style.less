@@ -7,6 +7,31 @@
 @opacity: #00000099;
 
 /* Typography */
+body {
+  overflow-x: hidden;
+}
+
+/*  */
+
+.body__blur {
+  background-color: rgb(94, 83, 83);
+}
+
+.submit {
+  display: block;
+  width: 100%;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: @darkblue;
+  padding: 14px 0;
+  background-color: @orange;
+  box-shadow: 0px 14px 20px rgba(151, 145, 0, 0.25);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
 
 .h2 {
   font-size: 36px;
@@ -70,59 +95,81 @@
         display: inline-block;
       }
     }
+  }
+}
 
-    .contacts {
-      display: flex;
-      align-items: center;
-      max-width: 236px;
-      margin-right: 40px;
+.mobile {
+  z-index: 9;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.82) 0%,
+      rgba(134, 134, 134, 0.5822) 100%
+    ),
+    rgba(0, 10, 36, 0.88);
 
-      &__phone {
-        position: relative;
-        max-width: 171px;
-        padding: 2px 7px 3px 61px;
-        background-color: @orange;
-        border-radius: 5px;
-      }
-
-      &__phone::before {
-        content: url(/images/Stroke-1.png);
-        position: absolute;
-        left: 10px;
-        top: 8px;
-      }
-
-      &__phone::after {
-        content: "";
-        position: absolute;
-        background-color: black;
-        width: 16px;
-        height: 1px;
-        transform: rotate(90deg);
-        left: 30px;
-        top: 14px;
-      }
-
-      &__number:extend(.p) {
-        color: @darkblue;
-      }
-
-      &__viber {
-        margin-right: 10px;
-        margin-left: 6px;
-      }
-    }
+  &__menu {
+    font-family: "Montserrat Alternates", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 25px;
+    color: white;
+  }
+  &__top {
+    max-width: 90%;
+    margin: 0 auto;
+    display: flex;
+    padding-top: 18px;
+    padding-bottom: 28px;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+  }
+  &__navigation {
+    margin-left: 7%;
+  }
+  &__item {
+    position: relative;
+    margin-top: 40px;
+  }
+  &__item::before {
+    content: "";
+    background-color: @orange;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 10px;
+    left: -20px;
+  }
+  &__link {
+    font-family: "Montserrat Alternates", sans-serif;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700;
+    color: @orange;
   }
 }
 
 .city {
   position: relative;
-  border: 2px solid #fbbe5b;
   width: 228px;
   border-radius: 5px;
+  top: -16px;
 
   &__list {
     list-style: none;
+    position: absolute;
+    z-index: 999;
+    width: 228px;
+  }
+
+  &__list-mob {
+    background-color: white;
+    position: static;
+    //margin-left: 20px;
   }
 
   &__list::before {
@@ -135,15 +182,19 @@
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
-    padding: 5px 51px 5px 87px;
+    padding: 5px 51px 5px 67px;
+    border: 2px solid #fbbe5b;
   }
 
   &__item {
+    border-bottom: 2px solid #fbbe5b;
+    text-align: center;
     cursor: pointer;
     &-hide {
       display: none;
     }
   }
+
   /* Arrow style */
 
   &::before,
@@ -156,6 +207,7 @@
     cursor: pointer;
     top: 13px;
     right: 20px;
+    z-index: 999;
   }
   &::before {
     transform: rotate(-50deg);
@@ -178,26 +230,52 @@
   }
 }
 
+.city-mobile {
+  left: 5%;
+  top: 20px;
+}
+
 .lang {
-  box-sizing: content-box;
   position: relative;
-  border: 2px solid #fbbe5b;
-  padding: 6px 5px;
-  border-radius: 50%;
 
   &__list {
+    position: absolute;
+    right: -10px;
+    z-index: 25;
+    list-style: none;
+  }
+
+  &__list-mob {
+    position: absolute;
+    right: 30%;
+    top: 0px;
+    z-index: 25;
     list-style: none;
   }
 
   &__item-init {
     cursor: pointer;
+    border: 2px solid #fbbe5b;
+    border-radius: 50%;
+    padding: 6px 5px;
+  }
+
+  &__item-init-mob {
+    background-color: white;
   }
 
   &__item {
     cursor: pointer;
+    border: 2px solid #fbbe5b;
+    border-radius: 50%;
+    padding: 6px 5px;
     &-hide {
       display: none;
     }
+  }
+
+  &__item-mob {
+    background-color: white;
   }
   /* Arrow style */
 
@@ -211,11 +289,20 @@
     cursor: pointer;
     top: 15px;
     right: -20px;
+    z-index: 99;
+    .md-block({
+      right: 28%;
+      top: 15px;
+      background-color: rgb(255, 255, 255);
+    });
   }
   &::before {
     transform: rotate(-50deg);
     right: -25px;
     transition: all 0.2s ease-out;
+    .md-block({
+      right: 27.2%;
+    });
   }
   &::after {
     transform: rotate(50deg);
@@ -360,6 +447,55 @@
       }
     }
   }
+}
+
+.contacts {
+  display: flex;
+  align-items: center;
+  max-width: 236px;
+  margin-right: 40px;
+
+  &__phone {
+    position: relative;
+    max-width: 171px;
+    padding: 2px 7px 3px 61px;
+    background-color: @orange;
+    border-radius: 5px;
+  }
+
+  &__phone::before {
+    content: url(/images/Stroke-1.png);
+    position: absolute;
+    left: 10px;
+    top: 8px;
+  }
+
+  &__phone::after {
+    content: "";
+    position: absolute;
+    background-color: black;
+    width: 16px;
+    height: 1px;
+    transform: rotate(90deg);
+    left: 30px;
+    top: 14px;
+  }
+
+  &__number:extend(.p) {
+    color: @darkblue;
+  }
+
+  &__viber {
+    margin-right: 10px;
+    margin-left: 6px;
+  }
+}
+
+.contacts-mobile {
+  justify-content: space-between;
+  max-width: 400px;
+  margin-left: 5%;
+  margin-top: 45px;
 }
 
 .second {
@@ -612,6 +748,7 @@
 }
 
 .screen5 {
+  position: relative;
   margin-top: -30%;
   padding-bottom: 200px;
   display: flex;
@@ -665,7 +802,13 @@
       cursor: pointer;
     }
 
-    &__tab:hover {
+    &__form__tab-unselect {
+      font-weight: 400;
+      background-color: white;
+      color: @grey;
+    }
+
+    &__tab-select {
       font-weight: 600;
       color: white;
       background-color: @grey;
@@ -822,20 +965,8 @@
 
     /* /////////////// */
 
-    &__submit {
-      display: block;
-      width: 100%;
+    &__submit-1:extend(.submit) {
       margin-top: 60px;
-      font-family: "Montserrat Alternates", sans-serif;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 22px;
-      color: @darkblue;
-      padding: 14px 0;
-      background-color: @orange;
-      box-shadow: 0px 14px 20px rgba(151, 145, 0, 0.25);
-      border-radius: 5px;
-      border: none;
     }
   }
   .options__wrapp {
@@ -968,6 +1099,125 @@
   .option-1 {
     margin-right: 20px;
   }
+  .formular {
+    visibility: hidden;
+    position: absolute;
+    width: 504px;
+    border: 1px solid #f5ba59;
+    border-radius: 5px;
+    background: #ffffff;
+    transition: 0.9s;
+    animation: slide-out-bck-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+    @keyframes slide-out-bck-top {
+      0% {
+        -webkit-transform: translateZ(1) translateY(0);
+        transform: translateZ(1) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        -webkit-transform: translateZ(-1100px) translateY(-1000px);
+        transform: translateZ(-1100px) translateY(-1000px);
+        opacity: 0;
+      }
+    }
+
+    &__title {
+      font-family: "Montserrat Alternates", sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 65px;
+      color: @darkblue;
+      padding-top: 24px;
+      padding-left: 50px;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 34px;
+
+      .input__wrap {
+        width: 412px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+      .input {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.05);
+        height: 50px;
+        border: none;
+        padding: 20px;
+      }
+      &__message {
+        padding: 20px;
+        width: 100%;
+        resize: none;
+        background-color: rgba(0, 0, 0, 0.05);
+        height: 125px;
+        border: none;
+      }
+      &__submit-2:extend(.submit) {
+        margin-top: 43px;
+      }
+
+      .input__wrap-checkbox {
+        display: flex;
+      }
+
+      &__label-2 {
+        font-size: 14px;
+        line-height: 17px;
+        font-family: "Montserrat Alternates", sans-serif;
+        color: rgba(0, 0, 0, 0.7);
+        display: block;
+        margin-left: 10px;
+      }
+    }
+    .close__formular {
+      position: relative;
+      border: none;
+      left: 90%;
+      top: 20px;
+      cursor: pointer;
+    }
+    .close__formular::after,
+    .close__formular::before {
+      content: "";
+      position: absolute;
+      background-color: @darkblue;
+      width: 25px;
+      height: 3px;
+    }
+    .close__formular::after {
+      transform: rotate(45deg);
+    }
+    .close__formular::before {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .formular__show {
+    margin: auto;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    //bottom: 0;
+    right: 0;
+    visibility: visible;
+    animation: rotate-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    @keyframes rotate-in {
+      0% {
+        -webkit-transform: rotateY(-360deg);
+        transform: rotateY(-360deg);
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .screen6 {
@@ -986,19 +1236,35 @@
     transform: translate(-50%, -50%);
   }
   .testimonial-swiper {
+    width: 90%;
+    margin: 0 auto;
+    //max-width: 200px;
+    overflow: visible;
+
     .swiper-wrapper {
-      margin: 0 auto;
-      max-width: 250px;
-      margin-top: 60px;
+      //margin: 0 auto;
+      //width: 100%;
+      padding-top: 220px;
+      justify-content: center;
 
       .driver__comment {
-        max-width: 324px;
+        //max-width: 324px;
+      }
+      .driver__img {
+        min-width: 140px;
+      }
+
+      .swiper-slide-active {
+        transition: 0.5s;
+        margin-top: -120px;
+        margin-right: 25% !important;
+        margin-left: 10% !important;
       }
 
       .swiper-slide {
-        .driver__img-wrap {
-          max-width: 137px;
-        }
+        width: 140px !important;
+        margin-right: -25px;
+        margin-left: -25px;
       }
     }
   }
@@ -1259,6 +1525,11 @@
   position: absolute;
   bottom: 45%;
   left: 20%;
+}
+.social-icons-mob {
+  width: 90%;
+  justify-content: space-around;
+  margin-top: 40px;
 }
 
 .contacts__phone-2 {
